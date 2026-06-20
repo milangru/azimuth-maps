@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaflet Satellite Azimuth Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <style>
+        /* Tvoj originalni CSS bez ikakvih izmena */
+        html, body { height: 100%; margin: 0; padding: 0; font-family: sans-serif; }
+        #map { height: 100%; width: 100%; }
+        #controls {
+            position: absolute; top: 10px; left: 49px; right: 24px;
+            background: rgba(255,255,255,0.95); padding: 10px;
+            border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            z-index: 1000; max-height: 40%; overflow-y: auto; max-width: fit-content;
+        }
+        #controls input, #controls button {
+            max-width: 250px; display: block; font-size: 16px; padding: 8px;
+            margin-bottom: 8px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;
+            width: 100%;
+        }
+        #controls button { background: #0078d7; color: white; border: none; cursor: pointer; }
+        #toggle-btn {
+            position: absolute; top: 10px; right: 10px; background: #0078d7;
+            color: white; border: none; padding: 10px 14px; border-radius: 8px;
+            cursor: pointer; z-index: 1001; font-size: 14px;
+        }
+        .angle-label {
+            background: rgba(255,255,255,0.9); padding: 2px 6px; border-radius: 4px;
+            font-size: 12px; border: 1px solid #333; white-space: nowrap; z-index: 2000;
+        }
+    </style>
+</head>
+<body>    
+
+<div id="map"></div>
+
+<div id="controls">
+    <label>Start Point (lat, lon):</label>
+    <input type="text" id="start" placeholder="45.238366 19.842254">
+    <label>Angles (comma separated):</label>
+    <input type="text" id="angles" placeholder="40, 120, 250">
+    <label>Distance (meters, optional):</label>
+    <input type="number" id="distance" placeholder="100">
+    <button id="drawBtn">Draw</button> 
+    
+    <button id="shareBtn" style="background: #28a745;">🔗 Share Link</button>
+</div>
+
+<button id="toggle-btn">Hide Controls</button>
+    
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="maps-azimuth-public.js"></script>
+</body>
+</html>
