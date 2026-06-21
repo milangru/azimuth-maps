@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const finalShareUrl = baseUrl + '?' + params.toString();
 
         navigator.clipboard.writeText(finalShareUrl).then(() => {
-            alert("Link uspešno kopiran! Možeš ga proslediti.");
+            alert("Link copied! You can share it now.");
         }).catch(err => {
             prompt("Kopiraj ovaj link ručno:", finalShareUrl);
         });
