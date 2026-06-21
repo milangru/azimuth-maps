@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const distanceInput = getInputOrPlaceholder("distance");
 
         const coords = parseCoords(startInput, startInput);
-        if(!coords) { alert("Unesite validne koordinate."); return; }
+        if(!coords) { alert("Put valid cordinates."); return; }
         const [lat, lon] = coords;
 
         // Čišćenje starih grafika sa mape
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         marker = L.marker([lat, lon]).addTo(map);
 
         const angles = anglesInput.split(',').map(a => parseFloat(a.trim())).filter(a => !isNaN(a));
-        if(angles.length === 0) { alert("Unesite bar jedan azimut."); return; }
+        if(angles.length === 0) { alert("Put at least one azimuth."); return; }
 
         const bounds = L.latLngBounds([lat, lon]);
 
@@ -123,28 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // // === FUNKCIJA ZA KREIRANJE I KOPIRANJE GENERISANOG LINKA ===
-    // function shareLink() {
-    //     const startVal = document.getElementById("start").value.trim() || document.getElementById("start").placeholder;
-    //     const anglesVal = document.getElementById("angles").value.trim() || document.getElementById("angles").placeholder;
-    //     const distanceVal = document.getElementById("distance").value.trim() || document.getElementById("distance").placeholder;
-
-    //     const baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
-        
-    //     const params = new URLSearchParams();
-    //     if (startVal) params.append('start', startVal.replace(/\s+/g, ',')); 
-    //     if (anglesVal) params.append('angles', anglesVal.replace(/\s+/g, ''));
-    //     if (distanceVal) params.append('distance', distanceVal);
-
-    //     const finalShareUrl = baseUrl + '?' + params.toString();
-
-    //     navigator.clipboard.writeText(finalShareUrl).then(() => {
-    //         alert("Link copied! You can share it now.");
-    //     }).catch(err => {
-    //         prompt("Kopiraj ovaj link ručno:", finalShareUrl);
-    //     });
-    // }
-
     // === FUNKCIJA ZA KREIRANJE I KOPIRANJE/DELJENJE GENERISANOG LINKA ===
     function shareLink() {
         const startVal = document.getElementById("start").value.trim() || document.getElementById("start").placeholder;
@@ -171,14 +149,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(err => {
                 // Korisnik je verovatno otkazao deljenje (kliknuo "X" ili pored menija),
                 // pa ovde ne moramo izbacivati dosadan alert, samo logujemo u konzolu
-                console.log('Deljenje otkazano:', err);
+                console.log('Sharing canceld:', err);
             });
         } else {
             // 2. Fallback za starije uređaje i desktop pretraživače (Tvoj originalni kod)
             navigator.clipboard.writeText(finalShareUrl).then(() => {
                 alert("Link copied! You can share it now.");
             }).catch(err => {
-                prompt("Kopiraj ovaj link ručno:", finalShareUrl);
+                prompt("Copy this link by hand:", finalShareUrl);
             });
         }
     }
