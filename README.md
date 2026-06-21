@@ -1,4 +1,4 @@
-# Azimuth Maps
+# Drawing Azimuth (Bearing) Lines On Maps
 
 A lightweight, browser-based tool for drawing azimuth (bearing) lines on a satellite map using [Leaflet](https://leafletjs.com/). Useful for antenna alignment, line-of-sight checks, surveying, or any task that requires visualizing directions/bearings from a fixed point.
 
