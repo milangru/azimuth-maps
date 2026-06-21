@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // 1. Provera da li pretraživač podržava Web Share API (mobilni telefoni)
         if (navigator.share) {
             navigator.share({
-                title: 'Azimuth Maps',
-                text: 'Pogledajte generisane azimute na mapi:',
+                title: 'Drawing Azimuth (Bearing) Lines On Maps',
+                text: 'Look at shared azimuths on maps:',
                 url: finalShareUrl
             })
             .then(() => console.log('Uspesno podeljeno!'))
