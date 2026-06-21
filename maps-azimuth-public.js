@@ -123,7 +123,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === FUNKCIJA ZA KREIRANJE I KOPIRANJE GENERISANOG LINKA ===
+    // // === FUNKCIJA ZA KREIRANJE I KOPIRANJE GENERISANOG LINKA ===
+    // function shareLink() {
+    //     const startVal = document.getElementById("start").value.trim() || document.getElementById("start").placeholder;
+    //     const anglesVal = document.getElementById("angles").value.trim() || document.getElementById("angles").placeholder;
+    //     const distanceVal = document.getElementById("distance").value.trim() || document.getElementById("distance").placeholder;
+
+    //     const baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+        
+    //     const params = new URLSearchParams();
+    //     if (startVal) params.append('start', startVal.replace(/\s+/g, ',')); 
+    //     if (anglesVal) params.append('angles', anglesVal.replace(/\s+/g, ''));
+    //     if (distanceVal) params.append('distance', distanceVal);
+
+    //     const finalShareUrl = baseUrl + '?' + params.toString();
+
+    //     navigator.clipboard.writeText(finalShareUrl).then(() => {
+    //         alert("Link copied! You can share it now.");
+    //     }).catch(err => {
+    //         prompt("Kopiraj ovaj link ručno:", finalShareUrl);
+    //     });
+    // }
+
+    // === FUNKCIJA ZA KREIRANJE I KOPIRANJE/DELJENJE GENERISANOG LINKA ===
     function shareLink() {
         const startVal = document.getElementById("start").value.trim() || document.getElementById("start").placeholder;
         const anglesVal = document.getElementById("angles").value.trim() || document.getElementById("angles").placeholder;
@@ -138,11 +160,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const finalShareUrl = baseUrl + '?' + params.toString();
 
-        navigator.clipboard.writeText(finalShareUrl).then(() => {
-            alert("Link copied! You can share it now.");
-        }).catch(err => {
-            prompt("Kopiraj ovaj link ručno:", finalShareUrl);
-        });
+        // 1. Provera da li pretraživač podržava Web Share API (mobilni telefoni)
+        if (navigator.share) {
+            navigator.share({
+                title: 'Azimuth Maps',
+                text: 'Pogledajte generisane azimute na mapi:',
+                url: finalShareUrl
+            })
+            .then(() => console.log('Uspesno podeljeno!'))
+            .catch(err => {
+                // Korisnik je verovatno otkazao deljenje (kliknuo "X" ili pored menija),
+                // pa ovde ne moramo izbacivati dosadan alert, samo logujemo u konzolu
+                console.log('Deljenje otkazano:', err);
+            });
+        } else {
+            // 2. Fallback za starije uređaje i desktop pretraživače (Tvoj originalni kod)
+            navigator.clipboard.writeText(finalShareUrl).then(() => {
+                alert("Link copied! You can share it now.");
+            }).catch(err => {
+                prompt("Kopiraj ovaj link ručno:", finalShareUrl);
+            });
+        }
     }
 
     // Povezivanje komandi sa HTML elementima
