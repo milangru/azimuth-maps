@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
         maxZoom: 20,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-        attribution: '© Maps'
+        attribution: '© Google Maps'
     }).addTo(map);
 
     let marker, lines = [], labels = [];
